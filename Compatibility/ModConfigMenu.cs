@@ -20,6 +20,8 @@ namespace Yousv.JunimaticGreenhouseWorkers
             if (api is null)
                 return;
 
+            string T(string key) => mod.Helper.Translation.Get(key).ToString();
+
             api.Register(mod.ModManifest, () => Reset(mod), () => mod.Helper.WriteConfig(mod.Config), false);
 
             AddBool(api, mod,
@@ -29,10 +31,10 @@ namespace Yousv.JunimaticGreenhouseWorkers
                     mod.Config.ModEnabled = v;
                     mod.InvalidateCutscenes();
                 },
-                "Enable mod",
-                "Turns all mod features on or off.");
+                T("config.mod-enabled.name"),
+                T("config.mod-enabled.tooltip"));
 
-            AddSection(api, mod, "General");
+            AddSection(api, mod, T("config.section.general"));
             AddBool(api, mod,
                 () => mod.Config.Enabled,
                 v =>
@@ -40,8 +42,8 @@ namespace Yousv.JunimaticGreenhouseWorkers
                     mod.Config.Enabled = v;
                     mod.InvalidateCutscenes();
                 },
-                "Enable workers",
-                "Allow greenhouse workers to emerge from Junimatic portals.");
+                T("config.workers-enabled.name"),
+                T("config.workers-enabled.tooltip"));
             api.AddTextOption(mod: mod.ModManifest,
                 getValue: () => mod.Config.Unlock,
                 setValue: v =>
@@ -49,79 +51,79 @@ namespace Yousv.JunimaticGreenhouseWorkers
                     mod.Config.Unlock = v;
                     mod.InvalidateCutscenes();
                 },
-                name: () => "Unlock requirement",
-                tooltip: () => "Junimatic quest required before workers appear: Crops, Animals, Mining, Fishing, Forestry, IndoorPots, or Always.",
+                name: () => T("config.unlock.name"),
+                tooltip: () => T("config.unlock.tooltip"),
                 allowedValues: ModConfig.UnlockOptions);
             api.AddNumberOption(mod: mod.ModManifest,
                 getValue: () => mod.Config.JunimoSpeed,
                 setValue: v => mod.Config.JunimoSpeed = v,
-                name: () => "Junimo speed",
-                tooltip: () => "Movement speed of greenhouse junimos (default is 3).",
+                name: () => T("config.junimo-speed.name"),
+                tooltip: () => T("config.junimo-speed.tooltip"),
                 min: 1, max: 10, interval: 1);
             AddBool(api, mod,
                 () => mod.Config.AllowAllLocations,
                 v => mod.Config.AllowAllLocations = v,
-                "Junimos work any indoors",
-                "Normally Junimos only work in the greenhouse. Turning this on allows Junimo portals to work in any indoor location with tilled soil. Does not work outdoors.");
+                T("config.allow-all-locations.name"),
+                T("config.allow-all-locations.tooltip"));
 
-            AddSection(api, mod, "Tasks");
+            AddSection(api, mod, T("config.section.tasks"));
             AddBool(api, mod,
                 () => mod.Config.PlantSeeds,
                 v => mod.Config.PlantSeeds = v,
-                "Plant seeds",
-                "Plant the most expensive seed from a chest into empty tilled soil.");
+                T("config.plant-seeds.name"),
+                T("config.plant-seeds.tooltip"));
             AddBool(api, mod,
                 () => mod.Config.WaterCrops,
                 v => mod.Config.WaterCrops = v,
-                "Water crops",
-                "Water planted soil that still needs water.");
+                T("config.water-crops.name"),
+                T("config.water-crops.tooltip"));
             AddBool(api, mod,
                 () => mod.Config.FertilizeCrops,
                 v => mod.Config.FertilizeCrops = v,
-                "Fertilize soil",
-                "Apply the most expensive fertilizer from a chest to tilled soil that can accept it, including right after planting.");
+                T("config.fertilize-soil.name"),
+                T("config.fertilize-soil.tooltip"));
             AddBool(api, mod,
                 () => mod.Config.HarvestCrops,
                 v => mod.Config.HarvestCrops = v,
-                "Harvest crops",
-                "Harvest ready crops back into a chest.");
+                T("config.harvest-crops.name"),
+                T("config.harvest-crops.tooltip"));
             AddBool(api, mod,
                 () => mod.Config.WaterAfterPlanting,
                 v => mod.Config.WaterAfterPlanting = v,
-                "Water after planting",
-                "Water a seedling immediately instead of on a later trip.");
+                T("config.water-after-planting.name"),
+                T("config.water-after-planting.tooltip"));
             AddBool(api, mod,
                 () => mod.Config.BulkCarry,
                 v => mod.Config.BulkCarry = v,
-                "Bulk carry",
-                "When enabled, junimo takes as many seeds/fertilizers as needed for pending work in one chest visit. (enabled by default)");
+                T("config.bulk-carry.name"),
+                T("config.bulk-carry.tooltip"));
             AddBool(api, mod,
                 () => mod.Config.AllowShipping,
                 v => mod.Config.AllowShipping = v,
-                "Allow shipping",
-                "When enabled, harvested goods are shipped to a mini shipping bin in the network instead of deposited in chests.");
+                T("config.allow-shipping.name"),
+                T("config.allow-shipping.tooltip"));
 
-            AddSection(api, mod, "Debug");
+            AddSection(api, mod, T("config.section.debug"));
             AddBool(api, mod,
                 () => mod.Config.VerboseLogging,
                 v => mod.Config.VerboseLogging = v,
-                "Verbose logging",
-                "Log detailed worker activity to the SMAPI console.");
+                T("config.verbose-logging.name"),
+                T("config.verbose-logging.tooltip"));
             AddBool(api, mod,
                 () => mod.Config.ShowPathDebug,
                 v => mod.Config.ShowPathDebug = v,
-                "Show path debug",
-                "Draw walkable tiles, soil access points, chests, and the junimo's planned route when in the greenhouse.");
+                T("config.show-path-debug.name"),
+                T("config.show-path-debug.tooltip"));
             AddBool(api, mod,
                 () => mod.Config.ShowTaskBubbles,
                 v => mod.Config.ShowTaskBubbles = v,
-                "Show task bubbles",
-                "Draw a speech bubble above each worker with its current task.");
+                T("config.show-task-bubbles.name"),
+                T("config.show-task-bubbles.tooltip"));
             AddBool(api, mod,
                 () => mod.Config.NeverDropItems,
                 v => mod.Config.NeverDropItems = v,
-                "Never drop items",
-                "When a tile is already planted or destroyed, skip it and keep working instead of dropping carried items. Items are returned to the chest if no more work remains.");
+                T("config.never-drop-items.name"),
+                T("config.never-drop-items.tooltip"));
         }
 
         private static void Reset(ModEntry mod)

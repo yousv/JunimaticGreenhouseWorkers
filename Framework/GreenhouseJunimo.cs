@@ -174,23 +174,23 @@ namespace Yousv.JunimaticGreenhouseWorkers
             this.showTextAboveHead(display);
         }
 
-        public void SetHarvestingTask(string cropName) => this.SetTaskInternal("harvesting", $"Harvesting {cropName}");
+        public void SetHarvestingTask(string cropName) => this.SetTaskInternal("harvesting", ModEntry.T("task.harvesting", new { cropName }));
 
-        public void SetStoringTask(string itemName) => this.SetTaskInternal("storing", $"Storing {itemName}");
+        public void SetStoringTask(string itemName) => this.SetTaskInternal("storing", ModEntry.T("task.storing", new { itemName }));
 
-        public void SetPlantingTask(string seedName, string fertName = null) => this.SetTaskInternal("planting", fertName is not null ? $"Planting {seedName} with {fertName}" : $"Planting {seedName}");
+        public void SetPlantingTask(string seedName, string fertName = null) => this.SetTaskInternal("planting", fertName is not null ? ModEntry.T("task.planting-with", new { seedName, fertName }) : ModEntry.T("task.planting", new { seedName }));
 
-        public void SetTakingSeedTask(string seedName) => this.SetTaskInternal("taking", $"Taking {seedName} from Chest");
+        public void SetTakingSeedTask(string seedName) => this.SetTaskInternal("taking", ModEntry.T("task.taking", new { itemName = seedName }));
 
-        public void SetTakingSeedAndFertTask(string seedName, string fertName) => this.SetTaskInternal("taking", $"Taking {seedName} and {fertName} from Chest");
+        public void SetTakingSeedAndFertTask(string seedName, string fertName) => this.SetTaskInternal("taking", ModEntry.T("task.taking-two", new { seedName, fertName }));
 
-        public void SetTakingFertTask(string fertName) => this.SetTaskInternal("taking", $"Taking {fertName} from Chest");
+        public void SetTakingFertTask(string fertName) => this.SetTaskInternal("taking", ModEntry.T("task.taking", new { itemName = fertName }));
 
-        public void SetWateringTask() => this.SetTaskInternal("watering", "Watering crops");
+        public void SetWateringTask() => this.SetTaskInternal("watering", ModEntry.T("task.watering"));
 
-        public void SetFertilizingTask(string plantName) => this.SetTaskInternal("fertilizing", $"Fertilizing {plantName}");
+        public void SetFertilizingTask(string plantName) => this.SetTaskInternal("fertilizing", ModEntry.T("task.fertilizing", new { plantName }));
 
-        public void SetReturningTask() => this.SetTaskInternal("returning", "Returning to portal");
+        public void SetReturningTask() => this.SetTaskInternal("returning", ModEntry.T("task.returning"));
 
         public void DoDisgustEmote()
         {

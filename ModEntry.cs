@@ -73,6 +73,13 @@ namespace Yousv.JunimaticGreenhouseWorkers
             }
         }
 
+        public static string T(string key, object tokens = null)
+        {
+            return tokens is null
+                ? Instance.Helper.Translation.Get(key).ToString()
+                : Instance.Helper.Translation.Get(key, tokens).ToString();
+        }
+
         public static void LogError(string message) => Instance?.Monitor.Log(message, LogLevel.Error);
         public static void LogWarning(string message) => Instance?.Monitor.Log(message, LogLevel.Warn);
         public static void LogJunimo(string message)

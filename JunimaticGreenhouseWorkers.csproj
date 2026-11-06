@@ -10,7 +10,7 @@
     <EnableHarmony>true</EnableHarmony>
     <EnableModDeploy>false</EnableModDeploy>
     <EnableModZip>false</EnableModZip>
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
     <Authors>Yousv</Authors>
     <DebugType>none</DebugType>
   </PropertyGroup>
@@ -18,7 +18,11 @@
     <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.1.1" />
   </ItemGroup>
   <Target Name="DeployToModsTesting" AfterTargets="Build">
+    <ItemGroup>
+      <TranslationFiles Include="$(ProjectDir)i18n\*.json" />
+    </ItemGroup>
     <Copy SourceFiles="$(TargetDir)JunimaticGreenhouseWorkers.dll" DestinationFolder="D:\Steam\steamapps\common\Stardew Valley\mods-testing\Junimatic Greenhouse Workers" ContinueOnError="True" />
     <Copy SourceFiles="$(ProjectDir)manifest.json" DestinationFolder="D:\Steam\steamapps\common\Stardew Valley\mods-testing\Junimatic Greenhouse Workers" ContinueOnError="True" />
+    <Copy SourceFiles="@(TranslationFiles)" DestinationFolder="D:\Steam\steamapps\common\Stardew Valley\mods-testing\Junimatic Greenhouse Workers\i18n" ContinueOnError="True" />
   </Target>
 </Project>
